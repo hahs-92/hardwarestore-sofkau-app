@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 //store
 import { store } from './store'
-
+//route
+import App from './routes/App';
+//styles
 import './index.css';
-import App from './App';
 
 
 
