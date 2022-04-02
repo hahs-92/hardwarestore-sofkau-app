@@ -17,10 +17,9 @@ export const Form = ({cb}) => {
         setError(null)
         setWarn(null)
         try {
-            cb(email, password)
-          //const userCredential =  await cb(email, password)
-          //console.log(userCredential.user)
+            await cb(email, password)
         } catch (error) {
+            console.log("error")
           setError(error.message)
         }
       }

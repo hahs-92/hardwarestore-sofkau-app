@@ -13,7 +13,7 @@ export const Signin = ({ isAuth }) => {
   const googleSignIn = async() => {
     try {
       const result = await signInWithGoogle()
-      GoogleAuthProvider.credentialFromResult(result)
+      await GoogleAuthProvider.credentialFromResult(result)
       console.log(result.user)
     } catch (error) {
           setError(error.message)
@@ -23,7 +23,7 @@ export const Signin = ({ isAuth }) => {
   const gitHubSignIn = async() => {
     try {
       const result = await signInWithGitHub()
-      GithubAuthProvider.credentialFromResult(result)
+      await GithubAuthProvider.credentialFromResult(result)
       console.log(result.user)
     } catch (error) {
           setError(error.message)

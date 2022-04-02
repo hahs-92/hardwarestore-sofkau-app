@@ -6,11 +6,12 @@ export const getProducts = (query) => async(dispatch) => {
     //loading
 
     try {
-        //fectch
+        const resp = await fetch("https://hardwarestore-sofkau.herokuapp.com/api/v1/products")
+        const products = await resp.json()
 
         dispatch({
             type: productsType.GET_PRODUCTS,
-            payload: [{ name: "testing"}]
+            payload: products
         })
     } catch(e) {
         //error
