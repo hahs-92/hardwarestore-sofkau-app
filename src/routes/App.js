@@ -23,20 +23,18 @@ import { PrivateRoutes } from '../components/PrivateRoutes'
 import { Header } from '../components/Header'
 
 
-
-
 function App() {
-  const [isAuth, setIsAuth] = useState(true)
+  const [isAuth, setIsAuth] = useState(true) //cambiar a false
 
-  useEffect(() => {
-    onAuthStateChanged(auth,(user) => {
-      if (user) {
-        setIsAuth(true)
-      } else {
-        setIsAuth(false)
-      }
-    })
-  },[isAuth])
+  // useEffect(() => {
+  //   onAuthStateChanged(auth,(user) => {
+  //     if (user) {
+  //       setIsAuth(true)
+  //     } else {
+  //       setIsAuth(false)
+  //     }
+  //   })
+  // },[isAuth])
 
   return (
     <BrowserRouter>
