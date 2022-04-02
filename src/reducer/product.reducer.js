@@ -49,6 +49,13 @@ export const productReducer = (state=INITAL_STATE, action) => {
                 error: false,
                 products: [...state.products, action.payload]
             }
+        case productsType.UPDATE_PRODUCT:
+            return {
+                ...state,
+                loading: false,
+                error: false,
+                products: state.products.map(p => p.id === action.payload.id ? action.payload : p)
+            }
 
         default:
             return state

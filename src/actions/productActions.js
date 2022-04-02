@@ -51,6 +51,22 @@ export const createProducts = (productsToCreate) => async(dispatch) => {
     }
 }
 
+export const updateProduct = (productsToUpdate) => async(dispatch) => {
+    dispatch({type: productsType.LOADING})
+
+    try {
+        //const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/products/createAll`)
+        //const products = await resp.json()
+
+        dispatch({
+            type: productsType.UPDATE_PRODUCT,
+            payload: productsToUpdate
+        })
+    } catch(e) {
+        dispatch({type: productsType.ERROR})
+    }
+}
+
 //agregar a un producto a la lista de productos a crear
 export const addProductToList = (productData) => async(dispatch) => {
     dispatch({
