@@ -22,5 +22,9 @@ export const suppliersType = {
 }
 
 export const invoicesType = {
-    GET_INVOICES: "GET_INVOICES"
+    LOADING: "LOADING",
+    ERROR: "ERROR",
+    GET_INVOICES: "GET_INVOICES",
+    GET_INVOICE: "GET_INVOICE",
+    CREATE_INVOICE: "CREATE_INVOICE"
 }

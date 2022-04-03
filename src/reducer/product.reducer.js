@@ -12,6 +12,17 @@ export const INITAL_STATE = {
 
 export const productReducer = (state=INITAL_STATE, action) => {
     switch (action.type) {
+        case productsType.ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: true,
+            }
+        case productsType.LOADING:
+            return {
+                ...state,
+                loading: true,
+            }
         case productsType.GET_PRODUCTS:
             return {
                 ...state,
@@ -55,6 +66,13 @@ export const productReducer = (state=INITAL_STATE, action) => {
                 loading: false,
                 error: false,
                 products: state.products.map(p => p.id === action.payload.id ? action.payload : p)
+            }
+        case productsType.DELETE_PRODUCT:
+            return {
+                ...state,
+                error: null,
+                loading: false,
+                products: state.products.filter(p => p.id !== action.payload)
             }
 
         default:

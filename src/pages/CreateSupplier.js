@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 //actions
 import { createSupplier } from '../actions/supplierActions'
 
 export const CreateSupplier = () => {
   const dispatch = useDispatch()
-  const [supplierData, setSupplierData] = useState({fullName: "", phoneNumber: "", email: ""})
+  const [supplierData, setSupplierData] = useState({citizenshipCard: "",fullName: "", phoneNumber: "", email: ""})
+  const loading = useSelector(state => state.suppliers.loading)
 
   const handleOnChange = (e) => {
     setSupplierData({
@@ -18,13 +19,21 @@ export const CreateSupplier = () => {
     e.preventDefault()
 
     dispatch(createSupplier(supplierData))
-    setSupplierData({fullName: "", phoneNumber: "", email: ""})
+    setSupplierData({citizenshipCard: "",fullName: "", phoneNumber: "", email: ""})
   }
 
   return (
     <main>
     <section>
       <form onSubmit={handleOnSubmit} >
+          <input
+            type="text"
+            placeholder="Cedula"
+            name="citizenshipCard"
+            value={supplierData.citizenshipCard}
+            onChange={handleOnChange}
+            required
+          />
           <input
             type="text"
             placeholder="Nombre Completo"
@@ -49,7 +58,7 @@ export const CreateSupplier = () => {
             onChange={handleOnChange}
             required
           />
-          <input type="submit" value="Add Supplier" />
+          <input type="submit" value={`${loading ? "loading..." : "Add "}`} />
       </form>
     </section>
   </main>

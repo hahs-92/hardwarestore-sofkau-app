@@ -1,11 +1,12 @@
 //types
-import { invoicesType} from '../types'
+import { invoicesType } from '../types'
 
 //initialState
 export const INITAL_STATE = {
     error: null,
     loading: false,
-    invoices: []
+    invoices: [],
+    invoice: {}
 }
 
 export const invoiceReducer = (state=INITAL_STATE, action) => {
@@ -13,8 +14,25 @@ export const invoiceReducer = (state=INITAL_STATE, action) => {
         case invoicesType.GET_INVOICES:
             return {
                 ...state,
+                error: null,
+                loading: false,
                 invoices: action.payload
             }
+        case invoicesType.GET_INVOICE:
+            return {
+                ...state,
+                error: null,
+                loading: false,
+                invoice: action.payload
+            }
+        case invoicesType.CREATE_INVOICE:
+            return {
+                ...state,
+                error: null,
+                loading: false,
+                invoices: [...state.invoices, action.payload]
+            }
+
 
         default:
             return state

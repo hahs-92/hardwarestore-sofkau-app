@@ -39,12 +39,18 @@ export const createProducts = (productsToCreate) => async(dispatch) => {
     dispatch({type: productsType.LOADING})
 
     try {
-        //const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/products/createAll`)
-        //const products = await resp.json()
+        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/products/createAll`,{
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(productsToCreate)
+        })
+        const products = await resp.json()
 
         dispatch({
             type: productsType.CREATE_PRODUCTS,
-            payload: productsToCreate
+            payload: products
         })
     } catch(e) {
         dispatch({type: productsType.ERROR})
@@ -92,15 +98,14 @@ export const removeProductToList = (productName) => async(dispatch) => {
 
 
 export const deleteProduct = (productId) => async(dispatch) => {
-    dispatch({type: productsType.LOADING})
-
     try {
-        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/products/${productId}`)
-        const product = await resp.json()
+        await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/products/${productId}`,{
+            method: "DELETE"
+        })
 
         dispatch({
-            type: productsType.GET_PRODUCT,
-            payload: product
+            type: productsType.DELETE_PRODUCT,
+            payload: productId
         })
     } catch(e) {
         dispatch({type: productsType.ERROR})

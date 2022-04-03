@@ -6,9 +6,10 @@ import { Link, useNavigate } from "react-router-dom"
 import { getSuppliers, deleteSupplier } from '../actions/supplierActions'
 
 export const Suppliers = () => {
-    const suppliers = useSelector(state => state.suppliers.suppliers)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const suppliers = useSelector(state => state.suppliers.suppliers)
+    const loading = useSelector(state => state.suppliers.loading)
 
     const suppliersData = useMemo(() => [...suppliers],[suppliers])
 
@@ -30,8 +31,8 @@ export const Suppliers = () => {
                     <button onClick={ () => navigate(`/suppliers/update/${row.values.id}`)}>
                         Edit
                     </button>
-                    <button onClick={() => dispatch(deleteSupplier.row.values.id)}>
-                        Delete
+                    <button onClick={() => dispatch(deleteSupplier(row.values.id))}>
+                        { loading ? "loading..." : "Delete"}
                     </button>
                 </section>
             ),
@@ -64,8 +65,9 @@ export const Suppliers = () => {
                 <Link to="/suppliers/create" >Add Supplier</Link>
             </section>
             <section>
+                { loading && <h2>Loading...</h2>}
                 {
-                    suppliers.length
+                    suppliers.length && !loading
                         ?
                             <table {...getTableProps()}>
                                 <thead>

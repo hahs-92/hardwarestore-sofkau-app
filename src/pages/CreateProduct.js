@@ -1,21 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Select from 'react-select'
+import { useNavigate } from 'react-router-dom'
 //actions
 import { addProductToList, removeProductToList, createProducts, cleanProductToList } from '../actions/productActions'
+import { getSuppliers } from '../actions/supplierActions'
 
 export const CreateProduct = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [ productInfo, setProductInfo] = useState({ name:"", price:"", quantity:"", limit:""})
   const [ supplierSelect, setSupplierSelect] = useState(null)
+  const [ warn, setWarn ] = useState(null)
   const listProductsToCreate = useSelector(state => state.products.listProductsToCreate)
+  const suppliers = useSelector(state => state.suppliers.suppliers)
 
-  //reemplazarlas por los supliers
-  const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ]
+  const options = suppliers.map(s => {
+    return {
+      value: s.fullName,
+      label: s.fullName
+    }
+  })
 
   const handleOnChange = (e) => {
     setProductInfo({
@@ -27,35 +32,54 @@ export const CreateProduct = () => {
   const handleCreateProducts = () => {
     dispatch(createProducts(listProductsToCreate))
     dispatch(cleanProductToList())
+    // enviarlo a la ruta del bolante
+    //navigate("/")
   }
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
+    if(!supplierSelect) {
+      setWarn("Debes elegir un Proveedor")
+      return
+    }
+
+    if(productInfo.limit < productInfo.quantity) {
+      setWarn("El limite esta alcanzado!")
+      return
+    }
+
     dispatch(addProductToList(
       {
         ...productInfo,
         price: parseInt(productInfo.price),
         quantity: parseInt(productInfo.quantity),
         limit: parseInt(productInfo.limit),
-        supplier: supplierSelect
+        supplier: suppliers.find(s => s.fullName === supplierSelect.value)
       }
     ))
     setProductInfo({ name:"", price:"", quantity:"", limit:""})
+    setWarn(null)
   }
 
-  console.log("prod: ", listProductsToCreate)
+  useEffect(() => {
+    dispatch(getSuppliers())
+  },[])
+
 
   return (
     <main>
       <section>
         <form onSubmit={handleOnSubmit} >
-            {/* validar si hay supplier */}
-            <Select
-                defaultValue={supplierSelect}
-                onChange={setSupplierSelect}
-                options={ options}
-                required
-            />
+            {
+              suppliers.length
+                ?  <Select
+                    defaultValue={supplierSelect}
+                    onChange={setSupplierSelect}
+                    options={ options}
+                    required
+                  />
+                : <span>No tienes ningun proveedor</span>
+            }
             <input
               type="text"
               placeholder="Nombre"
@@ -100,7 +124,6 @@ export const CreateProduct = () => {
                 <span>{p.name}</span>
                 <span>{p.price}</span>
                 <span>{p.quantity}</span>
-                <span>{p.supplier.value}</span>
               </section>
               <section>
                 <button onClick={() => dispatch(removeProductToList(p.name))}>Remove</button>

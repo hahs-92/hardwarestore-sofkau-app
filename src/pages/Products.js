@@ -6,15 +6,15 @@ import { useTable } from "react-table";
 import { getProducts, deleteProduct } from '../actions/productActions'
 
 export const Products = () => {
-    const products = useSelector(state => state.products.products)
-    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const products = useSelector(state => state.products.products)
+    const loading = useSelector(state => state.products.loading)
 
-    //todo
     const productsData = useMemo(() => products.map(p => {
         return {
             ...p,
-            supplier: p.supplier.fullName
+            supplier:  p?.supplier?.fullName
         }
     } ),[products])
 
@@ -43,7 +43,7 @@ export const Products = () => {
                     <button onClick={ () => navigate(`/products/update/${row.values.id}`)}>
                         Edit
                     </button>
-                    <button onClick={() => dispatch(deleteProduct.row.values.id)}>
+                    <button disabled={!!loading} onClick={() => dispatch(deleteProduct(row.values.id))}>
                         Delete
                     </button>
                 </section>
@@ -66,12 +66,14 @@ export const Products = () => {
         headerGroups,
         rows,
         prepareRow,
-      } = tableInstance
+    } = tableInstance
+
 
     useEffect(() => {
       dispatch(getProducts())
     },[])
 
+    console.log("load: ", loading)
 
     return (
         <main>
@@ -79,9 +81,11 @@ export const Products = () => {
                 <Link to="/products/create">Add Product</Link>
             </section>
             <section>
+                { loading && <h2>Loading...</h2>}
+                { !loading && !products.length && <h2>No hay productos</h2>}
                 {
-                    products.length
-                        ?
+                    products.length && !loading
+                        &&
                             <table {...getTableProps()}>
                                 <thead>
                                     { headerGroups.map((headerGroup) => (
@@ -111,7 +115,6 @@ export const Products = () => {
                                     })}
                                 </tbody>
                             </table>
-                        : <h2>No hay productos</h2>
                 }
             </section>
         </main>

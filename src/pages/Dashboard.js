@@ -11,7 +11,7 @@ export const Dashboard = () => {
     dispatch(getProducts())
   },[])
 
-  console.log("products: ", products)
+
 
   return (
     <main>
@@ -20,7 +20,7 @@ export const Dashboard = () => {
       </section>
 
       <section>
-
+        {/* listado productos */}
       </section>
 
       <section>

@@ -40,7 +40,13 @@ export const createSupplier = (supplierData) => async(dispatch) => {
 
     try {
         //todo
-        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/suppliers`)
+        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/suppliers`,{
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(supplierData)
+        })
         const supplier = await resp.json()
 
         dispatch({
@@ -56,8 +62,13 @@ export const updateSupplier = (supplierData) => async(dispatch) => {
     dispatch({ type: suppliersType.LOADING })
 
     try {
-        //todo
-        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/suppliers`)
+        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/suppliers`,{
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(supplierData)
+        })
         const supplier = await resp.json()
 
         dispatch({
@@ -73,9 +84,9 @@ export const deleteSupplier = (supplierId) => async(dispatch) => {
     dispatch({ type: suppliersType.LOADING })
 
     try {
-        //todo
-        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/suppliers/${supplierId}`)
-        const supplier = await resp.json()
+        await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/suppliers/${supplierId}`,{
+            method: "DELETE"
+        })
 
         dispatch({
             type: suppliersType.DELETE_SUPPLIER,
