@@ -30,7 +30,7 @@ export const flyerReducer = (state=INITAL_STATE, action) => {
                 ...state,
                 error: null,
                 loading: false,
-                flyers: [...state.invoices, action.payload]
+                flyers: [...state.flyers, action.payload]
             }
 
         default:

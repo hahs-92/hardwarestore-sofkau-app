@@ -45,6 +45,12 @@ export const Header = () => {
                             className={ ({isActive}) => isActive ? "red" : "" }
                         >Sales</NavLink>
                     </li>
+                    <li>
+                        <NavLink
+                            to="/flyers"
+                            className={ ({isActive}) => isActive ? "red" : "" }
+                        >Flyers</NavLink>
+                    </li>
                     <li onClick={ handleOnClick}>
                         logout
                     </li>

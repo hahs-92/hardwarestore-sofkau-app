@@ -1,12 +1,13 @@
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
 //actions
-import { getProduct, updateProduct} from '../actions/productActions'
+import { getProduct, updateProduct,addProductToList } from '../actions/productActions'
 
 
 export const UpdateProduct = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const product = useSelector(state => state.products.product)
   const [ productInfo, setProductInfo] = useState(product)
   const {id} = useParams()
@@ -21,21 +22,26 @@ export const UpdateProduct = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault()
     dispatch(updateProduct(productInfo))
+    //agregar producto a la lista
+    dispatch(addProductToList({
+      ...productInfo,
+      quantity: parseInt(productInfo.quantity) - parseInt(product.quantity),
+    }))
+    //redirigir a crear flyer
+    navigate("/flyers/create")
+
     setProductInfo({ name:"", price:"", quantity:"", limit:""})
   }
 
-  console.log("id: ", id)
-  console.log("update: ", productInfo)
 
   useEffect(() => {
-    if(id) getProduct(id)
+    dispatch(getProduct(id))
   },[id])
 
   return (
     <main>
       <section>
       <form onSubmit={handleOnSubmit} >
-            {/* mostrar el supplier */}
             <input
               type="text"
               placeholder="Nombre"
@@ -68,7 +74,7 @@ export const UpdateProduct = () => {
               onChange={handleOnChange}
               required
             />
-            <input type="submit" value="Add Product" />
+            <input type="submit" value="Update" />
         </form>
       </section>
     </main>

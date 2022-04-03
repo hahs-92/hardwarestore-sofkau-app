@@ -61,18 +61,18 @@ export const updateProduct = (productsToUpdate) => async(dispatch) => {
     dispatch({type: productsType.LOADING})
 
     try {
-        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/products/createAll`,{
-            method: "POST",
+        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/products`,{
+            method: "PUT",
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(productsToUpdate)
         })
-        const products = await resp.json()
+        const product = await resp.json()
 
         dispatch({
             type: productsType.UPDATE_PRODUCT,
-            payload: products
+            payload: product
         })
     } catch(e) {
         dispatch({type: productsType.ERROR})

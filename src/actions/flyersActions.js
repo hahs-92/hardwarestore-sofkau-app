@@ -36,9 +36,10 @@ export const getFlyer = (flyerId) => async(dispatch) => {
 
 export const createFlyer = (flyerData) => async(dispatch) => {
     dispatch({ type: flyersType.LOADING })
+    console.log("test: ", flyerData)
 
     try {
-        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/flyer`,{
+        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/flyers`,{
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -52,6 +53,7 @@ export const createFlyer = (flyerData) => async(dispatch) => {
             payload: flyer
         })
     } catch(e) {
+        console.log("error: ", e.message)
         dispatch({ type: flyersType.ERROR })
     }
 }

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import Select from 'react-select'
 import { useNavigate } from 'react-router-dom'
 //actions
-import { addProductToList, removeProductToList, createProducts, cleanProductToList } from '../actions/productActions'
+import { addProductToList, removeProductToList, createProducts } from '../actions/productActions'
 import { getSuppliers } from '../actions/supplierActions'
 
 export const CreateProduct = () => {
@@ -30,15 +30,17 @@ export const CreateProduct = () => {
   }
 
   const handleCreateProducts = () => {
+    if(!listProductsToCreate.length) {
+      return false
+    }
     dispatch(createProducts(listProductsToCreate))
-    dispatch(cleanProductToList())
-    // enviarlo a la ruta del bolante
     navigate("/flyers/create")
   }
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
     if(!supplierSelect) {
+      console.log("queee")
       setWarn("Debes elegir un Proveedor")
       return
     }
