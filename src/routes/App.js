@@ -19,6 +19,7 @@ import { CreateProduct } from '../pages/CreateProduct'
 import { UpdateProduct } from '../pages/UpdateProduct'
 import { Sales } from '../pages/Sales'
 import { CreateInvoice } from '../pages/CreateInvoice'
+import { CreateFlyer } from '../pages/CreateFlyer'
 //components
 import { PrivateRoutes } from '../components/PrivateRoutes'
 import { Header } from '../components/Header'
@@ -55,6 +56,8 @@ function App() {
       <Route path="products/update/:id" element={ <UpdateProduct />}/>
 
       <Route path="invoices/create" element={ <CreateInvoice />} />
+
+      <Route path="flyers/create" element={ <CreateFlyer />} />
 
       <Route path="sales" element={ <Sales /> } />
 

@@ -33,7 +33,7 @@ export const CreateProduct = () => {
     dispatch(createProducts(listProductsToCreate))
     dispatch(cleanProductToList())
     // enviarlo a la ruta del bolante
-    //navigate("/")
+    navigate("/flyers/create")
   }
 
   const handleOnSubmit = (e) => {

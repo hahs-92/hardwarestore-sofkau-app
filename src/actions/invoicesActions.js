@@ -39,7 +39,13 @@ export const createInvoice = (invoiceData) => async(dispatch) => {
 
     try {
         //todo post
-        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/invoices`)
+        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/invoices`,{
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(invoiceData)
+        })
         const invoice = await resp.json()
 
         dispatch({

@@ -28,3 +28,11 @@ export const invoicesType = {
     GET_INVOICE: "GET_INVOICE",
     CREATE_INVOICE: "CREATE_INVOICE"
 }
+
+export const flyersType = {
+    LOADING: "LOADING",
+    ERROR: "ERROR",
+    GET_FLYERS: "GET_FLYERS",
+    GET_FLYER: "GET_FLYER",
+    CREATE_FLYER: "CREATE_FLYER"
+}
