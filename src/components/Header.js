@@ -59,7 +59,7 @@ export const Header = () => {
                             className= {({isActive}) => isActive ? "text-green-50" : "text-black"}
                         >Flyers</NavLink>
                     </li>
-                    <li onClick={ handleOnClick}>
+                    <li className='cursor-pointer' onClick={ handleOnClick}>
                         logout
                     </li>
                 </ul>

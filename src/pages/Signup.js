@@ -14,7 +14,6 @@ export const Signup = ({ isAuth }) => {
     try {
       const result = await signInWithGoogle()
       GoogleAuthProvider.credentialFromResult(result)
-      console.log(result.user)
     } catch (error) {
           setError(error.message)
     }
@@ -24,7 +23,6 @@ export const Signup = ({ isAuth }) => {
     try {
       const result = await signInWithGitHub()
       GithubAuthProvider.credentialFromResult(result)
-      console.log(result.user)
     } catch (error) {
           setError(error.message)
     }
@@ -35,23 +33,33 @@ export const Signup = ({ isAuth }) => {
   },[isAuth])
 
   return (
-    <section>
-      <div>
-        <Form cb={ signup } />
-        <section>
+    <section  className='flex justify-center items-center my-12 min-h-fit'>
+      <div className='max-w-sm w-full shadow-lg'>
+        <Form cb={ signup } title="Sign Up"/>
+        <section className='p-4 flex flex-col items-center'>
           <span>Or</span>
-          <button onClick={googleSignIn} type="button">
+          <button
+            className='w-full h-9 border border-orange-500'
+            onClick={googleSignIn}
+            type="button"
+          >
             Sign Up with Google
           </button>
-          <button onClick={gitHubSignIn} type="button">
+          <button
+            className='my-2 w-full h-9 border border-neutral-600'
+            onClick={gitHubSignIn}
+            type="button"
+          >
             Sign Up with GitHub
           </button>
           {error && <p>{error}</p>}
         </section>
         <hr />
-        <p>Already have an account?
-            <Link to="/signin">Login</Link>
-        </p>
+        <section className='flex justify-center items-center h-11'>
+          <p>Already have an account?
+              <Link  className='text-orange-600' to="/signin">Login</Link>
+          </p>
+        </section>
       </div>
     </section>
   )

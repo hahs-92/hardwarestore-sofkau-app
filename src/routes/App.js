@@ -27,17 +27,17 @@ import { Header } from '../components/Header'
 
 
 function App() {
-  const [isAuth, setIsAuth] = useState(true) //cambiar a false
+  const [isAuth, setIsAuth] = useState(false)
 
-  // useEffect(() => {
-  //   onAuthStateChanged(auth,(user) => {
-  //     if (user) {
-  //       setIsAuth(true)
-  //     } else {
-  //       setIsAuth(false)
-  //     }
-  //   })
-  // },[isAuth])
+  useEffect(() => {
+    onAuthStateChanged(auth,(user) => {
+      if (user) {
+        setIsAuth(true)
+      } else {
+        setIsAuth(false)
+      }
+    })
+  },[isAuth])
 
   return (
     <BrowserRouter>

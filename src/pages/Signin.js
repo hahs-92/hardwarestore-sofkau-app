@@ -35,23 +35,33 @@ export const Signin = ({ isAuth }) => {
   },[isAuth])
 
   return (
-    <section>
-      <div>
-        <Form cb={ signin } />
-        <section>
+    <section className='flex justify-center items-center my-12 min-h-fit'>
+      <div className='max-w-sm w-full shadow-lg'>
+        <Form cb={ signin }  title="Sign In"/>
+        <section className='p-4 flex flex-col items-center'>
           <span>Or</span>
-          <button onClick={googleSignIn} type="button">
+          <button
+            className='w-full h-9 border border-orange-500'
+            onClick={googleSignIn}
+            type="button"
+          >
             Sign In with Google
           </button>
-          <button onClick={gitHubSignIn} type="button">
+          <button
+            className='my-2 w-full h-9 border border-neutral-600'
+            onClick={gitHubSignIn}
+            type="button"
+          >
             Sign In with GitHub
           </button>
           {error && <p>{error}</p>}
         </section>
         <hr />
-        <p >
-          Don't have an account? <Link to="/signup">Sign up</Link>
-        </p>
+        <section className='flex justify-center items-center h-11'>
+          <p >
+            Don't have an account? <Link className='text-orange-600' to="/signup">Sign up</Link>
+          </p>
+        </section>
       </div>
     </section>
   )
