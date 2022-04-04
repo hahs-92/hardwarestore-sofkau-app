@@ -30,7 +30,7 @@ export const CreateSupplier = () => {
           onSubmit={handleOnSubmit}
         >
             <input
-              className='w-full h-11 my-1'
+              className='w-full h-11 my-1 px-1'
               type="text"
               placeholder="Cedula"
               name="citizenshipCard"
@@ -39,7 +39,7 @@ export const CreateSupplier = () => {
               required
             />
             <input
-              className='w-full h-11 my-1'
+              className='w-full h-11 my-1 px-1'
               type="text"
               placeholder="Nombre Completo"
               name="fullName"
@@ -48,7 +48,7 @@ export const CreateSupplier = () => {
               required
             />
             <input
-              className='w-full h-11 my-1'
+              className='w-full h-11 my-1 px-1'
               type="text"
               placeholder="Numero Telefonico"
               name='phoneNumber'
@@ -57,7 +57,7 @@ export const CreateSupplier = () => {
               required
             />
             <input
-              className='w-full h-11 my-1'
+              className='w-full h-11 my-1 px-1'
               type="email"
               placeholder="Email"
               name='email'
@@ -66,7 +66,7 @@ export const CreateSupplier = () => {
               required
             />
             <input
-              className='w-full h-11 my-4 text-white rounded-sm bg-orange-500'
+              className='w-full h-11 my-4 text-white rounded-sm bg-orange-500 cursor-pointer'
               type="submit"
               value={`${loading ? "loading..." : "Add "}`}
               />

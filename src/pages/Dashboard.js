@@ -65,7 +65,7 @@ export const Dashboard = () => {
                         key={p.id}
                       >
                         <section className='px-3 grid grid-cols-4 '>
-                          <h4>{p.name}</h4>
+                          <h4 className='truncate'>{p.name}</h4>
                           <h4>{p.price}</h4>
                           <h4>{p.quantityToSell}</h4>
                           <section className='flex justify-center'>

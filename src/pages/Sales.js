@@ -1,20 +1,54 @@
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { jsPDF } from "jspdf";
 //actions
 import { getInvoices } from '../actions/invoicesActions'
 //components
 import { ListProductsItem } from "../components/ListProductsItem"
 
 export const Sales = () => {
+  const doc = new jsPDF({
+    orientation: "portrait",
+    unit: "in",
+    format: [8, 6]
+  })
   const dispatch = useDispatch()
   const invoices = useSelector(state => state.invoices.invoices)
 
+  const handlePdf = (invoice) => {
+
+    try {
+      const text = `
+
+
+        Date: ${invoice.date}
+
+        Client Info:
+
+        Cc: ${invoice.client.citizenshipCard}
+        ClientName: ${invoice.client.fullName}
+        ClientPhoneNumber: ${invoice.client.phoneNumber}
+
+        Seller Info:
+
+        Cc: ${invoice.seller.citizenshipCard}
+        SellerName: ${invoice.seller.fullName}
+
+        Total: $${invoice.products.reduce((acum, p)=>  (p.quantity * p.price) + acum,0)}
+
+      `
+      doc.text(text, 1, 1);
+      doc.save(`${invoice.id}.pdf`);
+    } catch(e) {
+      console.error(e.message)
+    }
+  }
 
   useEffect(() => {
     dispatch(getInvoices())
   },[])
 
-  console.log("invoces: ", invoices)
+
   return (
 
     <main className="w-full my-10 flex justify-center">
@@ -49,7 +83,10 @@ export const Sales = () => {
                   <ListProductsItem  products={i.products}/>
                 </div>
 
-                <button className="w-full h-11 my-2 bg-orange-500 text-white cursor-pointer">PDF</button>
+                <button
+                  onClick={() => handlePdf(i)}
+                  className="w-full h-11 my-2 bg-orange-500 text-white cursor-pointer"
+                >PDF</button>
 
               </article>
                ))

@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { jsPDF } from "jspdf";
 //actions
 import { getFlyers } from '../actions/flyersActions'
 //components
@@ -7,13 +8,44 @@ import { ListProductsItem } from "../components/ListProductsItem"
 import { Loader } from "../components/Loader"
 
 export const Flyers = () => {
+    const doc = new jsPDF({
+        orientation: "portrait",
+        unit: "in",
+        format: [8, 6]
+    })
     const dispatch = useDispatch()
     const flyers = useSelector(state => state.flyers.flyers)
     const loading = useSelector(state => state.flyers.loading)
 
+    const handlePdf = (flyer) => {
+
+        try {
+          const text = `
+
+
+            Date: ${flyer.date}
+
+            Supplier Info:
+
+            Cc: ${flyer.supplier.citizenshipCard}
+            SellerName: ${flyer.supplier.fullName}
+            PhoneNumber: ${flyer.supplier.phoneNumber}
+
+            Total: $${flyer.products.reduce((acum, p)=>  (p.quantity * p.price) + acum,0)}
+
+          `
+          doc.text(text, 1, 1);
+          doc.save(`${flyer.id}.pdf`);
+        } catch(e) {
+          console.error(e.message)
+        }
+      }
+
     useEffect(() => {
         dispatch(getFlyers())
     },[])
+
+    console.log(flyers)
 
     return (
         <main className="w-full my-10 flex justify-center">
@@ -40,6 +72,7 @@ export const Flyers = () => {
                                     <ListProductsItem products={f.products} />
                                 </div>
                                 <button
+                                    onClick={() => handlePdf(f)}
                                     className="w-full h-11 my-2 bg-orange-500 text-white cursor-pointer"
                                 >PDF</button>
                             </article>

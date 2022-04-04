@@ -44,7 +44,7 @@ export const ProductItem = ({product}) => {
             key={product?.id}
         >
             <section className='w-full grid grid-cols-5 '>
-                <h4>{ product.name }</h4>
+                <h4 className='truncate'>{ product.name }</h4>
                 <h4>{ product.price}</h4>
                 <input
                     className=''

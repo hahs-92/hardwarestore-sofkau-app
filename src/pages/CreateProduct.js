@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import Select from 'react-select'
 import { useNavigate } from 'react-router-dom'
+//icons
+import { XCircleIcon } from '@heroicons/react/solid'
 //actions
 import { addProductToList, removeProductToList, createProducts } from '../actions/productActions'
 import { getSuppliers } from '../actions/supplierActions'
@@ -53,9 +55,9 @@ export const CreateProduct = () => {
     dispatch(addProductToList(
       {
         ...productInfo,
-        price: parseInt(productInfo.price), //parseFloat?
-        quantity: parseInt(productInfo.quantity),
-        limit: parseInt(productInfo.limit),
+        price: parseFloat(productInfo.price.replace(".","")),
+        quantity: parseFloat(productInfo.quantity.replace(".","")),
+        limit: parseFloat(productInfo.limit.replace(".","")),
         supplier: suppliers.find(s => s.fullName === supplierSelect.value)
       }
     ))
@@ -145,7 +147,7 @@ export const CreateProduct = () => {
                 <section className=' w-1/12'>
                   <button
                     className='flex justify-around w-full'
-                    onClick={() => dispatch(removeProductToList(p.name))}>X</button>
+                    onClick={() => dispatch(removeProductToList(p.name))}><XCircleIcon className='w-7' /></button>
                 </section>
               </article>
             ))

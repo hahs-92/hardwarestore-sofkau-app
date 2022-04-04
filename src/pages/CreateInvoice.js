@@ -54,7 +54,7 @@ export const CreateInvoice = () => {
 
         dispatch(createInvoice(data))
         cleanProductToSelectList()
-        navigate("/sellers")
+        navigate("/sales")
     }
 
 
