@@ -69,7 +69,7 @@ export const CreateProduct = () => {
 
 
   return (
-    <main className='flex justify-center'>
+    <main className='flex justify-center w-full min-h'>
       <div className='flex my-20 w-full max-w-4xl shadow-lg' >
         <section className='p-2 w-2/5 h-ful' >
           <form

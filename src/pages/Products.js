@@ -43,7 +43,6 @@ export const Products = () => {
             Cell: ({ row }) => (
                 <section className="flex justify-between items-center">
                     <button
-                        className=""
                         onClick={ () => navigate(`/products/update/${row.values.id}`)}
                     >
                         Edit

@@ -28,7 +28,7 @@ export const Header = () => {
             </header>
 
             <nav className='w-5/12'>
-                <ul className='flex justify-around text-xl'>
+                <ul className='flex justify-around text-lg'>
                     <li>
                         <NavLink
                             to="/"

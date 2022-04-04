@@ -33,10 +33,17 @@ export const UpdateSupplier = () => {
 
 
   return (
-    <main>
-      <section>
-        <form onSubmit={handleOnSubmit} >
+    <main className="flex justify-center my-20">
+      <section className="p-4 w-full max-w-md bg-orange-50 shadow-lg">
+        <form
+          className="flex flex-col w-full"
+          onSubmit={handleOnSubmit}
+        >
+            <label
+              className="text-slate-500"
+              htmlFor="citizenshipCard">CitizenshipCard:</label>
             <input
+                className="w-full h-11 my-1 px-1"
                 type="text"
                 placeholder="Cedula"
                 name="citizenshipCard"
@@ -44,7 +51,12 @@ export const UpdateSupplier = () => {
                 onChange={handleOnChange}
                 readOnly
             />
+            <label
+              className="text-slate-500"
+              htmlFor="fullNanme"
+            >Full Name:</label>
             <input
+              className="w-full h-11 my-1 px-1"
               type="text"
               placeholder="Nombre Completo"
               name="fullName"
@@ -52,7 +64,11 @@ export const UpdateSupplier = () => {
               onChange={handleOnChange}
               required
             />
+            <label
+              className="text-slate-500"
+              htmlFor="phoneNumber">Phone Number:</label>
             <input
+              className="w-full h-11 my-1 px-1"
               type="text"
               placeholder="Numero Telefonico"
               name='phoneNumber'
@@ -60,7 +76,11 @@ export const UpdateSupplier = () => {
               onChange={handleOnChange}
               required
             />
+            <label
+              className="text-slate-500"
+              htmlFor="email">Email:</label>
             <input
+              className="w-full h-11 my-1 px-1"
               type="email"
               placeholder="Email"
               name='email'
@@ -68,7 +88,11 @@ export const UpdateSupplier = () => {
               onChange={handleOnChange}
               required
             />
-            <input type="submit" value="Update Supplier" />
+            <input
+              className="w-full h-11 my-4 px-1 text-white bg-orange-500 rounded-sm cursor-pointer"
+              type="submit"
+              value="Update Supplier"
+            />
         </form>
       </section>
     </main>

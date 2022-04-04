@@ -39,10 +39,15 @@ export const UpdateProduct = () => {
   },[id])
 
   return (
-    <main>
-      <section>
-      <form onSubmit={handleOnSubmit} >
+    <main className='flex justify-center items-center my-20 '>
+      <section className="flex p-5 w-full max-w-sm bg-orange-100 shadow-lg">
+        <form
+          className="flex flex-col w-full"
+          onSubmit={handleOnSubmit}
+        >
+            <label  className="text-slate-500" htmlFor="name">Name:</label>
             <input
+              className='h-11 my-1 px-1'
               type="text"
               placeholder="Nombre"
               name="name"
@@ -50,7 +55,9 @@ export const UpdateProduct = () => {
               onChange={handleOnChange}
               required
             />
+            <label  className="text-slate-500" htmlFor="price">Price:</label>
             <input
+              className='h-11 my-1 px-1'
               type="number"
               placeholder="Precio"
               name='price'
@@ -58,7 +65,9 @@ export const UpdateProduct = () => {
               onChange={handleOnChange}
               required
             />
+            <label className="text-slate-500" htmlFor="quanity">Quantity:</label>
             <input
+              className='h-11 my-1 px-1'
               type="number"
               placeholder="Cantidad"
               name='quantity'
@@ -66,7 +75,9 @@ export const UpdateProduct = () => {
               onChange={handleOnChange}
               required
             />
+            <label className="text-slate-500" htmlFor="limit">Limit:</label>
             <input
+              className='h-11 my-1  px-1'
               type="number"
               placeholder="Limit"
               name='limit'
@@ -74,7 +85,11 @@ export const UpdateProduct = () => {
               onChange={handleOnChange}
               required
             />
-            <input type="submit" value="Update" />
+            <input
+              className='h-11 my-1 px-1 bg-orange-500 text-white rounded-sm cursor-pointer'
+              type="submit"
+              value="Update"
+            />
         </form>
       </section>
     </main>

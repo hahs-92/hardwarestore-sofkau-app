@@ -23,44 +23,55 @@ export const CreateSupplier = () => {
   }
 
   return (
-    <main>
-    <section>
-      <form onSubmit={handleOnSubmit} >
-          <input
-            type="text"
-            placeholder="Cedula"
-            name="citizenshipCard"
-            value={supplierData.citizenshipCard}
-            onChange={handleOnChange}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Nombre Completo"
-            name="fullName"
-            value={supplierData.fullName}
-            onChange={handleOnChange}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Numero Telefonico"
-            name='phoneNumber'
-            value={supplierData.phoneNumber}
-            onChange={handleOnChange}
-            required
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            name='email'
-            value={supplierData.email}
-            onChange={handleOnChange}
-            required
-          />
-          <input type="submit" value={`${loading ? "loading..." : "Add "}`} />
-      </form>
-    </section>
-  </main>
+    <main className='flex justify-center my-14 w-full min-h'>
+      <section className='flex my-20 w-full max-w-sm shadow-lg bg-orange-50'>
+        <form
+          className='flex flex-col px-4 py-8 w-full'
+          onSubmit={handleOnSubmit}
+        >
+            <input
+              className='w-full h-11 my-1'
+              type="text"
+              placeholder="Cedula"
+              name="citizenshipCard"
+              value={supplierData.citizenshipCard}
+              onChange={handleOnChange}
+              required
+            />
+            <input
+              className='w-full h-11 my-1'
+              type="text"
+              placeholder="Nombre Completo"
+              name="fullName"
+              value={supplierData.fullName}
+              onChange={handleOnChange}
+              required
+            />
+            <input
+              className='w-full h-11 my-1'
+              type="text"
+              placeholder="Numero Telefonico"
+              name='phoneNumber'
+              value={supplierData.phoneNumber}
+              onChange={handleOnChange}
+              required
+            />
+            <input
+              className='w-full h-11 my-1'
+              type="email"
+              placeholder="Email"
+              name='email'
+              value={supplierData.email}
+              onChange={handleOnChange}
+              required
+            />
+            <input
+              className='w-full h-11 my-4 text-white rounded-sm bg-orange-500'
+              type="submit"
+              value={`${loading ? "loading..." : "Add "}`}
+              />
+        </form>
+      </section>
+    </main>
   )
 }
