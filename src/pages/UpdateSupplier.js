@@ -8,9 +8,9 @@ import { getSupplier, updateSupplier } from '../actions/supplierActions'
 export const UpdateSupplier = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { id } = useParams()
   const supplier = useSelector(state => state.suppliers.supplier)
-  const [supplierData, setSupplierData] = useState(supplier)
-  const {id} = useParams()
+  const [supplierData, setSupplierData] = useState({id: null,citizenshipCard: "", fullName: "", phoneNumber: "", email: ""})
 
   const handleOnChange = (e) => {
     setSupplierData({
@@ -29,8 +29,13 @@ export const UpdateSupplier = () => {
 
   useEffect(() => {
     dispatch(getSupplier(id))
-  },[id, supplier])
+  },[id])
 
+  useEffect(() => {
+    setSupplierData(supplier)
+  },[supplier])
+
+  console.log("ddd")
 
   return (
     <main className="flex justify-center my-20">

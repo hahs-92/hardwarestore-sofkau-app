@@ -33,10 +33,13 @@ export const UpdateProduct = () => {
     setProductInfo({ name:"", price:"", quantity:"", limit:""})
   }
 
-
   useEffect(() => {
     dispatch(getProduct(id))
   },[id])
+
+  useEffect(() => {
+    setProductInfo(product)
+  },[product])
 
   return (
     <main className='flex justify-center items-center my-20 '>

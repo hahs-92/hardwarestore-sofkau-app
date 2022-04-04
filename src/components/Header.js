@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom'
 //helpers
 import { logout } from '../helpers/auth'
+//icons
+import { LogoutIcon } from '@heroicons/react/outline'
 //assets
 import logo from '../assets/logo.jpg'
 
@@ -18,7 +20,7 @@ export const Header = () => {
     return (
         <section className='flex justify-between items-center p-4 h-28 bg-orange-500 shadow-lg' >
             <header>
-               <div>
+               <div className='rounded-full overflow-hidden'>
                 <img
                     className='w-20'
                     src={logo}
@@ -60,7 +62,7 @@ export const Header = () => {
                         >Flyers</NavLink>
                     </li>
                     <li className='cursor-pointer' onClick={ handleOnClick}>
-                        logout
+                        <LogoutIcon className='w-7' />
                     </li>
                 </ul>
             </nav>

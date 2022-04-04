@@ -130,11 +130,11 @@ export const CreateProduct = () => {
           </form>
         </section>
 
-        <section className='flex flex-col items-center justify-between p-2 w-3/5 h-full'>
+        <section className='flex flex-col items-center justify-between p-2 w-3/5 h-full bg-orange-50'>
           {
             listProductsToCreate.length && listProductsToCreate.map(p => (
               <article
-                className='flex justify-between items-center px-2 w-full max-w-xs h-12 shadow-lg'
+                className='flex justify-between items-center px-2 w-full max-w-xs h-12 shadow-lg bg-white text-slate-700'
                 key={p.name}
               >
                 <section className='flex justify-between w-10/12'>

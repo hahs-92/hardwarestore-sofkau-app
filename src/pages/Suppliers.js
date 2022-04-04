@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useMemo } from 'react'
 import { useTable } from "react-table";
 import { Link, useNavigate } from "react-router-dom"
+//icons
+import { PencilAltIcon, TrashIcon } from '@heroicons/react/outline'
 //actions
 import { getSuppliers, deleteSupplier } from '../actions/supplierActions'
 //components
@@ -31,10 +33,10 @@ export const Suppliers = () => {
             Cell: ({ row }) => (
                 <section className="flex justify-between items-center">
                     <button onClick={ () => navigate(`/suppliers/update/${row.values.id}`)}>
-                        Edit
+                        <PencilAltIcon className='w-7' />
                     </button>
                     <button onClick={() => dispatch(deleteSupplier(row.values.id))}>
-                        { loading ? "loading..." : "Delete"}
+                        <TrashIcon className='w-7 text-red-500' />
                     </button>
                 </section>
             ),
@@ -70,7 +72,7 @@ export const Suppliers = () => {
                         to="/suppliers/create"
                     >Add Supplier</Link>
                 </section>
-                <section className="w-full min-w-max p-5 bg-orange-100 shadow-lg">
+                <section className="w-full min-w-max p-5 bg-orange-50 shadow-lg">
                     { loading &&  <Loader />}
                     {
                         suppliers.length && !loading
@@ -93,11 +95,11 @@ export const Suppliers = () => {
                                             </tr>
                                         ))}
                                     </thead>
-                                    <tbody className="my-5" {...getTableBodyProps()}>
+                                    <tbody {...getTableBodyProps()}>
                                         { rows.map((row, idx) => {
                                             prepareRow(row)
                                             return (
-                                                <tr className="h-14"  {...row.getRowProps()}>
+                                                <tr className="h-14 bg-white"  {...row.getRowProps()}>
                                                     {row.cells.map((cell, idx) => (
                                                         <td {...cell.getCellProps()}>
                                                             { cell.render("Cell")}

@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+//icons
+import { PlusCircleIcon, MinusCircleIcon } from '@heroicons/react/solid'
 //actions
 import { addProductToSelectList } from '../actions/productActions'
 
@@ -37,24 +39,31 @@ export const ProductItem = ({product}) => {
     }
 
     return (
-        <article key={product?.id}>
-            <section>
-                <h4>Name: { product.name }</h4>
-                <h4>Price: { product.price}</h4>
-            </section>
-            <section>
+        <article
+            className='my-2 px-1 w-full h-14 bg-white flex flex-col justify-center shadow-md'
+            key={product?.id}
+        >
+            <section className='w-full grid grid-cols-5 '>
+                <h4>{ product.name }</h4>
+                <h4>{ product.price}</h4>
                 <input
+                    className=''
                     type="number"
                     name='quantity'
                     value={quantity}
                     onChange={ handleSetQuantity }
                     disabled
                 />
-            </section>
-            <section>
-                <button onClick={ handleIncreaseQuantity }> + </button>
-                <button onClick={ handleDecreaseQuantity }> - </button>
-                <button onClick={() => handleAddProduct(product)}>add</button>
+                <section className='full flex justify-between px-3'>
+                    <button onClick={ handleIncreaseQuantity }> <PlusCircleIcon className='w-7' /> </button>
+                    <button onClick={ handleDecreaseQuantity }> <MinusCircleIcon className='w-7' /> </button>
+                </section>
+                <section className='full flex justify-center px-3'>
+                    <button
+                        className='bg-orange-500 text-white w-16'
+                        onClick={() => handleAddProduct(product)}
+                    >Add</button>
+                </section>
             </section>
         </article>
     )

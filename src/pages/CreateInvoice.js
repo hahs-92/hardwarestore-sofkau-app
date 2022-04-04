@@ -59,12 +59,16 @@ export const CreateInvoice = () => {
 
 
     return (
-        <main>
-            <section>
-                <form onSubmit={handleOnSubmit}>
-                    <div>
+        <main className="flex justify-center my-16">
+            <section className="p-8 w-full max-w-md bg-orange-50 shadow-lg">
+                <form
+                className="flex flex-col"
+                    onSubmit={handleOnSubmit}
+                >
+                    <div className="my-1 flex flex-col">
                         <span>Datos del Cliente</span>
                         <input
+                            className="my-1 px-1 h-11"
                             type="text"
                             placeholder="Nombre completo"
                             name="fullName"
@@ -73,6 +77,7 @@ export const CreateInvoice = () => {
                             required
                         />
                         <input
+                             className="my-1 px-1 h-11"
                             type="text"
                             placeholder="Numero Cedula"
                             name="citizenshipCard"
@@ -81,6 +86,7 @@ export const CreateInvoice = () => {
                             required
                         />
                         <input
+                             className="my-1 px-1 h-11"
                             type="text"
                             placeholder="Telefono"
                             name="phoneNumber"
@@ -89,9 +95,10 @@ export const CreateInvoice = () => {
                             required
                         />
                     </div>
-                    <div>
+                    <div className="my-1 flex flex-col">
                         <span>Datos del Vendedor</span>
                         <input
+                             className="my-1 px-1 h-11"
                             type="text"
                             placeholder="Nombre completo"
                             name="fullName"
@@ -100,6 +107,7 @@ export const CreateInvoice = () => {
                             required
                         />
                         <input
+                            className="my-1 px-1 h-11"
                             type="text"
                             placeholder="Numero Cedula"
                             name="citizenshipCard"
@@ -108,6 +116,7 @@ export const CreateInvoice = () => {
                             required
                         />
                         <input
+                            className="my-1 px-1 h-11"
                             type="text"
                             placeholder="Telefono"
                             name="phoneNumber"
@@ -116,10 +125,14 @@ export const CreateInvoice = () => {
                             required
                         />
                     </div>
-                    <div>
-                        <p>Total: ${ getTotal() }</p>
+                    <div className="my-1">
+                        <p>Total: $ <span className="mx-3 text-gray-700">{ getTotal() }</span></p>
                     </div>
-                    <input type="submit" value="Send" />
+                    <input
+                        className="my-1 px-1 h-11 bg-orange-500 rounded text-white cursor-pointer"
+                        type="submit"
+                        value="Create Invoice"
+                    />
                 </form>
             </section>
         </main>
