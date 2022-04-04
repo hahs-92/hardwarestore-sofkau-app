@@ -79,6 +79,28 @@ export const updateProduct = (productsToUpdate) => async(dispatch) => {
     }
 }
 
+export const updateProducts = (listProductsToUpdate) => async(dispatch) => {
+    dispatch({type: productsType.LOADING})
+
+    try {
+        const resp = await fetch(`https://hardwarestore-sofkau.herokuapp.com/api/v1/products/updateAll`,{
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(listProductsToUpdate)
+        })
+        const products = await resp.json()
+
+        dispatch({
+            type: productsType.UPDATE_PRODUCTS,
+            payload: products
+        })
+    } catch(e) {
+        dispatch({type: productsType.ERROR})
+    }
+}
+
 //agregar a un producto a la lista de productos a crear
 export const addProductToList = (productData) => async(dispatch) => {
     dispatch({
@@ -98,6 +120,26 @@ export const cleanProductToList = () => async(dispatch) => {
 export const removeProductToList = (productName) => async(dispatch) => {
     dispatch({
         type: productsType.REMOVE_PRODUCT_TO_LIST,
+        payload: productName
+    })
+}
+
+export const addProductToSelectList = (productData) => async(dispatch) => {
+    dispatch({
+        type: productsType.ADD_PRODUCT_TO_SELECT_LIST,
+        payload: productData
+    })
+}
+
+export const cleanProductToSelectList = () => async(dispatch) => {
+    dispatch({
+        type: productsType.CLEAN_PRODUCT_TO_LIST
+    })
+}
+
+export const removeProductToSelectList = (productName) => async(dispatch) => {
+    dispatch({
+        type: productsType.REMOVE_PRODUCT_TO_SELECT_LIST,
         payload: productName
     })
 }

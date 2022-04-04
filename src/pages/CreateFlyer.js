@@ -36,7 +36,7 @@ export const CreateFlyer = () => {
         <main>
             <section>
                 <article>
-                    <h3>Date: { getDateFormat()}</h3>
+                    <h3>Date: { getDateFormat() }</h3>
 
                     <div>
                         <h3>Products:</h3>

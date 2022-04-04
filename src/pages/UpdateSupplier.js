@@ -29,7 +29,7 @@ export const UpdateSupplier = () => {
 
   useEffect(() => {
     dispatch(getSupplier(id))
-  },[id])
+  },[id, supplier])
 
 
   return (

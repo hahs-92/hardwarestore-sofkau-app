@@ -7,7 +7,8 @@ export const INITAL_STATE = {
     loading: false,
     products: [],
     product: {},
-    listProductsToCreate:[]
+    listProductsToCreate:[],
+    listProductsToSell: []
 }
 
 export const productReducer = (state=INITAL_STATE, action) => {
@@ -53,6 +54,22 @@ export const productReducer = (state=INITAL_STATE, action) => {
                 ...state,
                 listProductsToCreate: []
             }
+        case productsType.ADD_PRODUCT_TO_SELECT_LIST:
+            return {
+                ...state,
+                listProductsToSell: [...state.listProductsToSell, action.payload]
+            }
+        case productsType.REMOVE_PRODUCT_TO_SELECT_LIST:
+            return {
+                ...state,
+                listProductsToSell: state.listProductsToSell
+                    .filter(p => p.name !== action.payload)
+            }
+        case productsType.CLEAN_SELECT_LIST:
+            return {
+                ...state,
+                listProductsToSell: []
+            }
         case productsType.CREATE_PRODUCTS:
             return {
                 ...state,
@@ -66,6 +83,13 @@ export const productReducer = (state=INITAL_STATE, action) => {
                 loading: false,
                 error: false,
                 products: state.products.map(p => p.id === action.payload.id ? action.payload : p)
+            }
+        case productsType.UPDATE_PRODUCTS:
+            return {
+                ...state,
+                loading: false,
+                error: false,
+                products: [...state.products, ]
             }
         case productsType.DELETE_PRODUCT:
             return {
