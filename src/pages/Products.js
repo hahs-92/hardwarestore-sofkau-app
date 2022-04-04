@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useTable } from "react-table";
 //actions
 import { getProducts, deleteProduct } from '../actions/productActions'
+//components
+import { Loader } from "../components/Loader";
 
 export const Products = () => {
     const navigate = useNavigate()
@@ -39,8 +41,11 @@ export const Products = () => {
             id: "Options",
             Header: "Options",
             Cell: ({ row }) => (
-                <section>
-                    <button onClick={ () => navigate(`/products/update/${row.values.id}`)}>
+                <section className="flex justify-between items-center">
+                    <button
+                        className=""
+                        onClick={ () => navigate(`/products/update/${row.values.id}`)}
+                    >
                         Edit
                     </button>
                     <button disabled={!!loading} onClick={() => dispatch(deleteProduct(row.values.id))}>
@@ -73,50 +78,63 @@ export const Products = () => {
       dispatch(getProducts())
     },[])
 
-    console.log("load: ", loading)
-
     return (
-        <main>
-            <section>
-                <Link to="/products/create">Add Product</Link>
-            </section>
-            <section>
-                { loading && <h2>Loading...</h2>}
-                { !loading && !products.length && <h2>No hay productos</h2>}
+        <main className="flex justify-center my-20">
+            <div className="flex flex-wrap justify-center">
+                <section className="w-full h-11">
+                    <Link
+                        className="w-10 h-full p-2 text-white bg-orange-500 rounded-sm"
+                        to="/products/create"
+                    >Add Product</Link>
+                </section>
+                { loading && <Loader />}
                 {
-                    products.length && !loading
-                        &&
-                            <table {...getTableProps()}>
-                                <thead>
-                                    { headerGroups.map((headerGroup) => (
-                                        <tr {...headerGroup.getHeaderGroupProps()}>
-                                            { headerGroup.headers.map((col) => (
-                                                <th
-                                                    {...col.getHeaderProps()}
-                                                >
-                                                    { col.render("Header")}
-                                                </th>
-                                            ))}
-                                        </tr>
-                                    ))}
-                                </thead>
-                                <tbody {...getTableBodyProps()}>
-                                    { rows.map((row, idx) => {
-                                        prepareRow(row)
-                                        return (
-                                            <tr {...row.getRowProps()}>
-                                                {row.cells.map((cell, idx) => (
-                                                    <td {...cell.getCellProps()}>
-                                                        { cell.render("Cell")}
-                                                    </td>
+                    !loading &&
+                        <section className="w-full min-w-max p-5 bg-orange-100 shadow-lg">
+                            {
+                                products.length
+                                    ?
+                                        <table
+                                            className="w-full"
+                                            {...getTableProps()}
+                                        >
+                                            <thead className="h-14">
+                                                { headerGroups.map((headerGroup) => (
+                                                    <tr {...headerGroup.getHeaderGroupProps()}>
+                                                        { headerGroup.headers.map((col) => (
+                                                            <th
+                                                                className="border border-orange-500"
+                                                                {...col.getHeaderProps()}
+                                                            >
+                                                                { col.render("Header")}
+                                                            </th>
+                                                        ))}
+                                                    </tr>
                                                 ))}
-                                            </tr>
-                                        )
-                                    })}
-                                </tbody>
-                            </table>
+                                            </thead>
+                                            <tbody
+                                                className="my-5"
+                                                {...getTableBodyProps()}
+                                            >
+                                                { rows.map((row, idx) => {
+                                                    prepareRow(row)
+                                                    return (
+                                                        <tr className="h-14" {...row.getRowProps()}>
+                                                            {row.cells.map((cell, idx) => (
+                                                                <td {...cell.getCellProps()}>
+                                                                    { cell.render("Cell")}
+                                                                </td>
+                                                            ))}
+                                                        </tr>
+                                                    )
+                                                })}
+                                            </tbody>
+                                        </table>
+                                    : <h2>Not Products!</h2>
+                            }
+                        </section>
                 }
-            </section>
+            </div>
         </main>
     )
 }

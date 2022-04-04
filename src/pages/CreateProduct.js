@@ -53,7 +53,7 @@ export const CreateProduct = () => {
     dispatch(addProductToList(
       {
         ...productInfo,
-        price: parseInt(productInfo.price),
+        price: parseInt(productInfo.price), //parseFloat?
         quantity: parseInt(productInfo.quantity),
         limit: parseInt(productInfo.limit),
         supplier: suppliers.find(s => s.fullName === supplierSelect.value)
@@ -69,74 +69,95 @@ export const CreateProduct = () => {
 
 
   return (
-    <main>
-      <section>
-        <form onSubmit={handleOnSubmit} >
-            {
-              suppliers.length
-                ?  <Select
-                    defaultValue={supplierSelect}
-                    onChange={setSupplierSelect}
-                    options={ options}
-                    required
-                  />
-                : <span>No tienes ningun proveedor</span>
-            }
-            <input
-              type="text"
-              placeholder="Nombre"
-              name="name"
-              value={productInfo.name}
-              onChange={handleOnChange}
-              required
-            />
-            <input
-              type="number"
-              placeholder="Precio"
-              name='price'
-              value={productInfo.price}
-              onChange={handleOnChange}
-              required
-            />
-            <input
-              type="number"
-              placeholder="Cantidad"
-              name='quantity'
-              value={productInfo.quantity}
-              onChange={handleOnChange}
-              required
-            />
-            <input
-              type="number"
-              placeholder="Limit"
-              name='limit'
-              value={productInfo.limit}
-              onChange={handleOnChange}
-              required
-            />
-            <input type="submit" value="Add Product" />
-        </form>
-      </section>
+    <main className='flex justify-center'>
+      <div className='flex my-20 w-full max-w-4xl shadow-lg' >
+        <section className='p-2 w-2/5 h-ful' >
+          <form
+            className='w-full flex flex-col'
+            onSubmit={handleOnSubmit}
+          >
+              {
+                suppliers.length
+                  ?  <Select
+                      defaultValue={supplierSelect}
+                      onChange={setSupplierSelect}
+                      options={ options}
+                      required
+                    />
+                  : <span>No tienes ningun proveedor</span>
+              }
+              <input
+                className='h-11 my-1 px-1'
+                type="text"
+                placeholder="Nombre"
+                name="name"
+                value={productInfo.name}
+                onChange={handleOnChange}
+                required
+              />
+              <input
+                className='h-11 my-1 px-1'
+                type="number"
+                placeholder="Precio"
+                name='price'
+                value={productInfo.price}
+                onChange={handleOnChange}
+                required
+              />
+              <input
+                className='h-11 my-1 px-1'
+                type="number"
+                placeholder="Cantidad"
+                name='quantity'
+                value={productInfo.quantity}
+                onChange={handleOnChange}
+                required
+              />
+              <input
+                className='h-11 my-1 px-1'
+                type="number"
+                placeholder="Limit"
+                name='limit'
+                value={productInfo.limit}
+                onChange={handleOnChange}
+                required
+              />
+              <input
+                className='h-11 my-1 px-1 bg-orange-500 rounded-sm text-white cursor-pointer'
+                type="submit"
+                value="Add Product"
+              />
+          </form>
+        </section>
 
-      <section>
-        {
-          listProductsToCreate.length && listProductsToCreate.map(p => (
-            <article key={p.name}>
-              <section>
-                <span>{p.name}</span>
-                <span>{p.price}</span>
-                <span>{p.quantity}</span>
-              </section>
-              <section>
-                <button onClick={() => dispatch(removeProductToList(p.name))}>Remove</button>
-              </section>
-            </article>
-          ))
-        }
-        <div>
-          <button onClick={handleCreateProducts}>Add products</button>
-        </div>
-      </section>
+        <section className='flex flex-col items-center justify-between p-2 w-3/5 h-full'>
+          {
+            listProductsToCreate.length && listProductsToCreate.map(p => (
+              <article
+                className='flex justify-between items-center px-2 w-full max-w-xs h-12 shadow-lg'
+                key={p.name}
+              >
+                <section className='flex justify-between w-10/12'>
+                  <span>{p.name}</span>
+                  <span>{p.price}</span>
+                  <span>{p.quantity}</span>
+                </section>
+                <section className=' w-1/12'>
+                  <button
+                    className='flex justify-around w-full'
+                    onClick={() => dispatch(removeProductToList(p.name))}>X</button>
+                </section>
+              </article>
+            ))
+          }
+          <div className='w-full flex justify-center self-baseline'>
+            <button
+              className='items-end h-11 w-full max-w-xs bg-orange-500 rounded-sm text-white cursor-pointer'
+              onClick={handleCreateProducts}
+            >Check</button>
+          </div>
+        </section>
+      </div>
     </main>
   )
 }
